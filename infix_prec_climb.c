@@ -68,11 +68,6 @@ void Tokens_free(Tokens toks) {
     free(toks.items);
 }
 
-bool Token_is_binary_op(Token tok) {
-    return tok.type == TOK_PLUS || tok.type == TOK_MINUS
-        || tok.type == TOK_TIMES || tok.type == TOK_DIVIDE;
-}
-
 Tokens lex_string(const char *str) {
     Tokens toks = {0};
     while (*str != '\0') {
@@ -242,7 +237,7 @@ PrecPair prec_alist[] = {
 // main ------------------------------------------------------------------------
 
 int main(void) {
-    AST *classic = classic_parse("1 * 2 + 3 * (4 + 5)");
+    AST *classic = classic_parse("1 * 2 + 3 * (4 * 5 + 6 * 7)");
     AST_print(classic);
     putchar('\n');
     return 0;
